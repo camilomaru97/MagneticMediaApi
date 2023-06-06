@@ -1,5 +1,5 @@
 const { response } = require('express');
-const Catalogo = require('../models/catalogo');
+const Catalogo = require('../models/Catalogo');
 
 const obtenerCatalogo = async (req, res = response) => {
     const catalogos = await Catalogo.find()
