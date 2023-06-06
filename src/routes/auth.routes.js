@@ -7,6 +7,53 @@ const { validarCampos } = require('../middlewares/validar-campos');
 const { check } = require('express-validator');
 const router = Router();
 
+/**
+ * @swagger
+ * components:
+ *      schemas:
+ *          Usuario: 
+ *              type: object
+ *              properties:
+ *                  name: 
+ *                      type: string
+ *                      description: El nombre de usuario
+ *                  email: 
+ *                      type: string
+ *                      description: El correo del usuario
+ *                  password:
+ *                      type: password
+ *                      description: Contraseña del usuario
+ *              required: 
+ *                  - name
+ *                  - email
+ *                  - password
+ *              example: 
+ *                  name: Miguel Duran
+ *                  email: miguelduran@ucatolica.edu.co
+ *                  password: Miguelduran@2023
+ */
+
+
+
+/**
+ * @swagger
+ *  /api/auth/new:
+ *      post: 
+ *          summary: Crea un nuevo usuario
+ *          tags: [Usuario]
+ *          requestBody: 
+ *              required: true
+ *              content: 
+ *                  application/json:
+ *                      schema: 
+ *                          type: object
+ *                          $ref: '#/components/schemas/Usuario'
+ *          responses: 
+ *              200: 
+ *                  description: El usuario fue creado con exito
+ *              500: 
+ *                  description: Hable con el administrador
+ */
 router.post(
     '/new',
     [ // middlewares
@@ -20,10 +67,74 @@ router.post(
     ],
     crearUsuario
 )
+
+/**
+ * @swagger
+ *  /api/auth/:
+ *      post: 
+ *          summary: Login de un usuario
+ *          tags: [Usuario]
+ *          requestBody: 
+ *              required: true
+ *              content: 
+ *                  application/json:
+ *                      schema: 
+ *                          type: object
+ *                          $ref: '#/components/schemas/Usuario'
+ *          responses: 
+ *              200: 
+ *                  description: El usuario se autentico exitosamente
+ *              400: 
+ *                  description: El usuario no existe con ese email
+ *              500: 
+ *                  description: Hable con el administrador
+ */
 router.post('/', loginUsuario)
 
+/**
+ * @swagger
+ *  /api/auth/renew:
+ *      get: 
+ *          summary: Revalidacion del token
+ *          tags: [Usuario]
+ *          requestBody: 
+ *              required: true
+ *              content: 
+ *                  application/json:
+ *                      schema: 
+ *                          type: object
+ *                          $ref: '#/components/schemas/Usuario'
+ *          responses: 
+ *              200: 
+ *                  description: El token se ha renovado
+ *              400: 
+ *                  description: El usuario no existe con ese email
+ *              500: 
+ *                  description: Hable con el administrador
+ */
 router.get('/renew', revalidarToken)
 
+/**
+ * @swagger
+ *  /api/auth/confirm/{token}:
+ *      get: 
+ *          summary: Confirmacion del usuario via email
+ *          tags: [Usuario]
+ *          parameters: 
+ *              - in: path
+ *                name: token
+ *                schema:
+ *                  type: string
+ *                required: true
+ *                description: Token del usuario  
+ *          responses: 
+ *              200: 
+ *                  description: La cuenta ha sido confirmada con exito
+ *              400: 
+ *                  description: Confirmacion de cuenta no valida
+ *              500: 
+ *                  description: Hable con el administrador
+ */
 router.get('/confirm/:token', confirmarCuenta)
 
 

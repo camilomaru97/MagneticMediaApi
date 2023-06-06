@@ -11,11 +11,135 @@ const router = Router();
 //Validación del JWT
 router.use(validarJWT);
 
+/**
+ * @swagger
+ * components:
+ *      schemas:
+ *          Ironsalida: 
+ *              type: object
+ *              properties:
+ *                  fecha_salida: 
+ *                      type: date
+ *                      description: La fecha de salida de iron salida
+ *                  fecha_devolucion: 
+ *                      type: date
+ *                      description: La fecha_devolucion de iron salida
+ *                  destino:
+ *                      type: string
+ *                      description: El destino de iron salida
+ *                  ubicacion:
+ *                      type: string
+ *                      description: La ubicacion de iron salida
+ *                  numero_remision:
+ *                      type: number
+ *                      description: El numero_remision de iron salida
+ *                  codigo_medio:
+ *                      type: string
+ *                      description: El codigo de iron salida
+ *              required: 
+ *                  - fecha_salida
+ *                  - fecha_devolucion
+ *                  - destino
+ *                  - ubicacion
+ *                  - numero_remision
+ *                  - codigo_medio
+ *              example: 
+ *                  fecha_salida: 300000000000
+ *                  fecha_devolucion: 512325232344
+ *                  destino: Bogota
+ *                  ubicacion: Bogota
+ *                  numero_remision: 1234567891243456
+ *                  codigo_medio: 12345675
+ */
+
 //Obtener ironSalida 
+/**
+ * @swagger
+ *  /api/ironsalida:
+ *      get: 
+ *          summary: Retorna todos los iron salida
+ *          tags: [Ironsalida]
+ *          parameters: 
+ *              - in: token
+ *                name: token
+ *                required: true
+ *                description: token usuario
+ *          requestBody: 
+ *              required: true
+ *              content: 
+ *                  application/json:
+ *                      schema: 
+ *                          type: array
+ *                          items:
+ *                              $ref: '#/components/schemas/Ironsalida'
+ *          responses: 
+ *              200: 
+ *                  description: ok
+ *              500: 
+ *                  description: Hable con el administrador
+ */
 router.get('/', obtenerIronSalida);
+
+/**
+ * @swagger
+ *  /api/ironsalida/{id}:
+ *      get: 
+ *          summary: Retorna un iron salida
+ *          tags: [Ironsalida]
+ *          parameters: 
+ *              - in: token
+ *                name: token
+ *                required: true
+ *                description: token usuario
+ *              - in: path
+ *                name: id
+ *                schema:
+ *                  type: string
+ *                required: true
+ *                description: id iron salida  
+ *          responses: 
+ *              200: 
+ *                  description: ok
+ *                  content: 
+ *                      application/json:
+ *                          schema: 
+ *                              type: object
+ *                              $ref: '#/components/schemas/Ironsalida'
+ *              404: 
+ *                  description: iron salida not found
+ */
 router.get('/:id', obtenerIronSalidaId);
 
 //Crear un nuevo ironSalida
+/**
+ * @swagger
+ *  /api/ironsalida:
+ *      post: 
+ *          summary: Crear un nuevo iron salida
+ *          tags: [Ironsalida]
+ *          parameters: 
+ *              - in: token
+ *                name: token
+ *                required: true
+ *                description: token usuario
+ *          requestBody: 
+ *              required: true
+ *              content: 
+ *                  application/json:
+ *                      schema: 
+ *                          type: object
+ *                          $ref: '#/components/schemas/Ironsalida'
+ *          responses: 
+ *              200: 
+ *                  description: ok
+ *                  content: 
+ *                      application/json:
+ *                          schema: 
+ *                              type: object
+ *                              $ref: '#/components/schemas/Ironsalida'
+ *              404: 
+ *                  description: iron salida ya existe
+ */
 router.post(
     '/',
     [// middlewares
@@ -34,6 +158,29 @@ router.post(
 );
 
 //Actualizar ironSalida
+/**
+ * @swagger
+ *  /api/ironsalida/{id}:
+ *      put: 
+ *          summary: Actualiza un iron salida
+ *          tags: [Ironsalida]
+ *          parameters: 
+ *              - in: token
+ *                name: token
+ *                required: true
+ *                description: token usuario
+ *              - in: path
+ *                name: id
+ *                schema:
+ *                  type: string
+ *                required: true
+ *                description: id iron salida  
+ *          responses: 
+ *              200: 
+ *                  description: iron salida actualizado
+ *              404: 
+ *                  description: iron salida not found
+ */
 router.put(
     '/:id',
     [// middlewares
@@ -52,6 +199,29 @@ router.put(
 );
 
 //Borrar ironSalida
+/**
+ * @swagger
+ *  /api/ironsalida/{id}:
+ *      delete: 
+ *          summary: Elimina un iron salida
+ *          tags: [Ironsalida]
+ *          parameters: 
+ *              - in: token
+ *                name: token
+ *                required: true
+ *                description: token usuario
+ *              - in: path
+ *                name: id
+ *                schema:
+ *                  type: string
+ *                required: true
+ *                description: id iron salida  
+ *          responses: 
+ *              200: 
+ *                  description: iron salida eliminado
+ *              404: 
+ *                  description: iron salida not found
+ */
 router.delete('/:id', eliminarIronSalida);
 
 module.exports = router;
