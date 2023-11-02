@@ -28,6 +28,7 @@ app.use('/api/auth', require('./src/routes/auth.routes'));
 app.use('/api/ironllegada', require('./src/routes/ironLlegada.routes'));
 app.use('/api/ironsalida', require('./src/routes/ironSalida.routes'));
 app.use('/api/catalogo', require('./src/routes/catalogo.routes'));
+app.use('/api/exam', require('./src/routes/exam.routes'));
 app.use('/api-doc', swaggerUI.serve, swaggerUI.setup(swaggerJsDoc(swaggerSpecification)))
 
 //Escuchar peticiones
