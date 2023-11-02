@@ -27,12 +27,12 @@ const obtenerCatalogolidaId = async (req, res = response) => {
             });
         }
 
-        if (catalogoById.usuario.toString() !== uid) {
-            return res.status(401).json({
-                ok: false,
-                msg: 'No tiene privilegio de eliminar este catalogo'
-            });
-        }
+        // if (catalogoById.usuario.toString() !== uid) {
+        //     return res.status(401).json({
+        //         ok: false,
+        //         msg: 'No tiene privilegio de ver este catalogo'
+        //     });
+        // }
 
         res.json({
             ok: true,
@@ -117,7 +117,7 @@ const crearCatalogo = async (req, res = response) => {
                 msg: 'El tipo de tecnologia debe ser LT08, LT07, LT06 o LT04'
             });
         }
-
+        
         const catalogoGuardado = await catalogo.save();
 
         res.json({
@@ -133,6 +133,7 @@ const crearCatalogo = async (req, res = response) => {
         });
     }
 }
+
 const actualizarCatalogo = async (req, res = response) => {
     const catalogoId = req.params.id;
     const uid = req.uid;
@@ -194,7 +195,7 @@ const eliminarCatalogo = async (req, res = response) => {
         if (catalogo.usuario.toString() !== uid) {
             return res.status(401).json({
                 ok: false,
-                msg: 'No tiene privilegio de eliminar este catalogo'
+                msg: 'No tienes privilegios de eliminar este catalogo'
             });
         }
 
