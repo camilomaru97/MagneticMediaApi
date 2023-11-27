@@ -2,7 +2,7 @@ const { Schema, model } = require('mongoose');
 
 const ExamSchema = Schema(
   {
-    inital_game: {
+    initial_game: {
       type: Date,
       required: true,
     },
@@ -13,13 +13,17 @@ const ExamSchema = Schema(
     usuario: {
       type: Schema.Types.ObjectId,
       ref: 'Usuario',
-      required: true,
+      required: false,
     },
     score: {
       type: Number,
       required: true,
     },
     ip_user: {
+      type: String,
+      required: true,
+    },
+    name: {
       type: String,
       required: true,
     },

@@ -129,10 +129,16 @@ const confirmarCuenta = async (req, res = response) => {
 
     await usuario.save();
 
-    res.json({
-        ok: true,
-        msg: 'Cuenta confirmada con exito',
-    })
+    const html = `
+    <div style="display: flex; align-items: center; justify-content: center; height: 100vh; flex-direction: column;">
+        <h1>Bienvenido a MagneticMediaApp</h1>
+        <div style="margin-top: -20px; text-align: center;">
+            <h2>Tu cuenta ha sido confirmada satisfactoriamente</h2>
+            <a href="http://localhost:5174/auth" style="margin-top: 10px; text-decoration: none; padding: 10px 20px; background-color: #007bff; color: #fff; border-radius: 5px; display: inline-block;">Autenticarme</a>
+        </div>
+    </div>
+`;
+    res.send(html);
 }
 
 module.exports = {

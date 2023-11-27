@@ -1,16 +1,25 @@
 const nodemailer = require("nodemailer")
 
 const emailRegistro = async (data) => {
-    const transport = nodemailer.createTransport({
-        host: process.env.GMAIL_HOST,
-        port: process.env.GMAIL_PORT,
-        secure: true,
-        auth: {
-            user: process.env.GMAIL_USER,
-            pass: process.env.GMAIL_PASSWORD
-        }
+    // const transport = nodemailer.createTransport({
+    //     host: process.env.GMAIL_HOST,
+    //     port: process.env.GMAIL_PORT,
+    //     secure: true,
+    //     auth: {
+    //         user: process.env.GMAIL_USER,
+    //         pass: process.env.GMAIL_PASSWORD
+    //     }
         
-    });
+    // });
+
+    const transport = nodemailer.createTransport({
+        host: "sandbox.smtp.mailtrap.io",
+        port: 2525,
+        auth: {
+          user: "033ca82770ad86",
+          pass: "509727e8636556"
+        }
+      });
 
     const { name, email, token } = data;
 

@@ -24,6 +24,7 @@ app.use(express.static('public'))
 app.use(express.json());
 
 //Rutas
+
 app.use('/api/auth', require('./src/routes/auth.routes'));
 app.use('/api/ironllegada', require('./src/routes/ironLlegada.routes'));
 app.use('/api/ironsalida', require('./src/routes/ironSalida.routes'));
